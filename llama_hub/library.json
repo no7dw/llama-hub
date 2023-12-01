@@ -1108,5 +1108,9 @@
   "OpensearchReader": {
     "id": "opensearch",
     "author": "chnsagitchen"
+  },
+  "CryptoReader": {
+    "id": "crypto_footprint",
+    "auth": "no7dw"
   }
 }

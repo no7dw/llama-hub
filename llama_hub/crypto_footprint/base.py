@@ -40,7 +40,7 @@ class CryptoReader(BaseReader):
         """
 
         query_string = urllib.parse.urlencode(query_dict)
-        url = f"https://api.footprint.network/api/v3/{domain}?{query_string}"
+        url = f"https://api.footprint.network/api/{domain}?{query_string}"
 
         response = requests.get(url, headers=self.headers)
         return [Document(text=str(data)) for data in response]
@@ -55,5 +55,5 @@ if __name__ == "__main__":
                   'limit': 3,
                   'token_address': '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2'
                   }
-    res = cr.load_data(domain='address/getWalletERC20TokenBalance', query_dict=query_dict)
+    res = cr.load_data(domain='v3/address/getWalletERC20TokenBalance', query_dict=query_dict)
     print(res)
