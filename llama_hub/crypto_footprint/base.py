@@ -43,7 +43,7 @@ class CryptoReader(BaseReader):
         url = f"https://api.footprint.network/api/{domain}?{query_string}"
 
         response = requests.get(url, headers=self.headers)
-        return [Document(text=str(data)) for data in response]
+        return [Document(text=str(data)) for data in response.json()['data']]
 
 
 if __name__ == "__main__":
@@ -56,4 +56,9 @@ if __name__ == "__main__":
                   'token_address': '0x6b3595068778dd592e39a122f4f5a5cf09c90fe2'
                   }
     res = cr.load_data(domain='v3/address/getWalletERC20TokenBalance', query_dict=query_dict)
-    print(res)
+
+    import json
+    import pandas as pd
+    res2 = [json.loads(d.text.replace("'", "\"")) for d in res]
+    df = pd.DataFrame(res2)
+    print(res2, df)
